@@ -12,7 +12,7 @@ namespace InterviewQuestions.Tests
         [TestMethod]
         public void ShouldReturnMaxEditSteps5()
         { 
-            var words = new List<string>()
+            var words = new List<string>
             {
                 "cat",
                 "dig",
