@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace InterviewQuestions.Tests
 {
     [TestClass]
-    public class MergeSortTests
+    public class QuickSortTests
     {
-        private MergeSort Sorter { get; } = new MergeSort();
+        private QuickSort Sorter { get; } = new QuickSort();
 
         [TestMethod]
-        public void ShouldMergeSortIntValuesAscending()
+        public void ShouldQuickSortIntValuesAscending()
         {
             var values = new List<int>
             {
@@ -39,7 +38,7 @@ namespace InterviewQuestions.Tests
         }
 
         [TestMethod]
-        public void ShouldMergeSortIntValuesDescending()
+        public void ShouldQuickSortIntValuesDescending()
         {
             var values = new List<int>
             {
