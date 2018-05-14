@@ -53,11 +53,16 @@
     <Compile Include="KthSmallestElementTests.cs" />
     <Compile Include="TwoSumTests.cs" />
     <Compile Include="MergeSortTests.cs" />
+    <Compile Include="ReverseLinkedListTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\InterviewQuestions.DataStructures\InterviewQuestions.DataStructures.csproj">
+      <Project>{9548f8a8-a9bb-42b5-bc88-f5108dede98e}</Project>
+      <Name>InterviewQuestions.DataStructures</Name>
+    </ProjectReference>
     <ProjectReference Include="..\InterviewQuestions\InterviewQuestions.csproj">
       <Project>{a0bf4f46-52cc-44dc-9e5e-dda508eb8160}</Project>
       <Name>InterviewQuestions</Name>

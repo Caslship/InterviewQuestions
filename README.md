@@ -1,2 +1,2 @@
 # InterviewQuestions
-Common interview questions for .NET
+Common interview questions implemented in .NET

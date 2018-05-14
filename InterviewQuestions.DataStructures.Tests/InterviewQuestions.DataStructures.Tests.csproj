@@ -51,6 +51,7 @@
     <Compile Include="MinHeapTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MaxHeapTests.cs" />
+    <Compile Include="NodeTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
