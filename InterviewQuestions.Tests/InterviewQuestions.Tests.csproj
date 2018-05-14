@@ -51,6 +51,8 @@
     <Compile Include="EditStepLadderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="KthSmallestElementTests.cs" />
+    <Compile Include="TwoSumTests.cs" />
+    <Compile Include="MergeSortTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

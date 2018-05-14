@@ -12,6 +12,9 @@ namespace InterviewQuestions.DataStructures
         private Heap<T> LeftChild { get; set; }
         private Heap<T> RightChild { get; set; }
         private IComparer<T> Comparer { get; }
+        public bool ExistsLeftChild => LeftChild != null;
+        public bool ExistsRightChild => RightChild != null;
+        public bool HasChildren => ExistsLeftChild || ExistsRightChild;
 
         public Heap(T value, IComparer<T> comparer)
         {
@@ -75,24 +78,50 @@ namespace InterviewQuestions.DataStructures
 
         public T PopRoot()
         {
-            var rootValue = Value;
-
-            if (LeftChild == null && RightChild == null)
+            if (!HasChildren)
             {
-                Value = default(T);
+                return Value;
             }
 
-            // TODO: Finish this
+            var newRoot = (
+                ExistsLeftChild
+                ? ExistsRightChild && RightChild.ShouldComeBefore(LeftChild.Value)
+                    ? RightChild
+                    : LeftChild
+                : RightChild
+            );
 
-            return rootValue;
+            var oldValue = Value;
+            Value = newRoot.Value;
+
+            if (!newRoot.HasChildren)
+            {
+                var isLeftChild = LeftChild == newRoot;
+                var isRightChild = RightChild == newRoot;
+
+                if (isLeftChild)
+                {
+                    LeftChild = null;
+                }
+                else
+                {
+                    RightChild = null;
+                }
+            }
+            else
+            {
+                newRoot.PopRoot();
+            }
+
+            return oldValue;
         }
 
-        public bool ShouldComeBefore(T value)
+        protected bool ShouldComeBefore(T value)
         {
             return Comparer.Compare(Value, value) < 0;
         }
 
-        public bool ShouldComeAfter(T value)
+        protected bool ShouldComeAfter(T value)
         {
             return !ShouldComeBefore(value);
         }
