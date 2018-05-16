@@ -10,7 +10,7 @@ namespace InterviewQuestions.DataStructures.Tests
         [TestMethod]
         public void ShouldReturnSmallestNumber2()
         {
-            var heap = MinHeap<int>.Heapify(
+            var heap = new MinHeap<int>(
                 new List<int>
                 {
                     6,
@@ -23,7 +23,7 @@ namespace InterviewQuestions.DataStructures.Tests
                 }
             );
 
-            var min = heap.GetRoot();
+            var min = heap.PeekRoot();
 
             Assert.AreEqual(2, min);
         }

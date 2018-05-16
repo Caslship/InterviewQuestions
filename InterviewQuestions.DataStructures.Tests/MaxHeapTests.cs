@@ -10,7 +10,7 @@ namespace InterviewQuestions.DataStructures.Tests
         [TestMethod]
         public void ShouldReturnBiggestNumber7()
         {
-            var heap = MaxHeap<int>.Heapify(
+            var heap = new MaxHeap<int>(
                 new List<int>
                 {
                     3,
@@ -23,7 +23,7 @@ namespace InterviewQuestions.DataStructures.Tests
                 }
             );
 
-            var max = heap.GetRoot();
+            var max = heap.PeekRoot();
 
             Assert.AreEqual(7, max);
         }

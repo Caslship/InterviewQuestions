@@ -13,11 +13,8 @@ namespace InterviewQuestions.DataStructures
             return x.CompareTo(y);
         });
 
-        public MinHeap(T value) : base(value, MinHeapComparer) { }
+        public MinHeap() : base(MinHeapComparer) { }
 
-        public static Heap<T> Heapify(List<T> values)
-        {
-            return Heap<T>.Heapify(values, MinHeapComparer);
-        }
+        public MinHeap(List<T> values) : base(MinHeapComparer, values) { }
     }
 }

@@ -13,11 +13,8 @@ namespace InterviewQuestions.DataStructures
             return -1 * x.CompareTo(y);
         });
 
-        public MaxHeap(T value) : base(value, MaxHeapComparer) { }
+        public MaxHeap() : base(MaxHeapComparer) { }
 
-        public static Heap<T> Heapify(List<T> values)
-        {
-            return Heap<T>.Heapify(values, MaxHeapComparer);
-        }
+        public MaxHeap(List<T> values) : base(MaxHeapComparer, values) { }
     }
 }

@@ -16,7 +16,7 @@ namespace InterviewQuestions
                 throw new ArgumentException();
             }
 
-            var heap = MinHeap<T>.Heapify(elements);
+            var heap = new MinHeap<T>(elements);
 
             for (var i = 0; i < k - 1; ++i)
             {

@@ -8,140 +8,118 @@ namespace InterviewQuestions.DataStructures
 {
     public class Heap<T>
     {
-        public T Value { get; private set; }
-        private Heap<T> LeftChild { get; set; }
-        private Heap<T> RightChild { get; set; }
+        private List<T> Values { get; }
         private IComparer<T> Comparer { get; }
-        public bool ExistsLeftChild => LeftChild != null;
-        public bool ExistsRightChild => RightChild != null;
-        public bool HasChildren => ExistsLeftChild || ExistsRightChild;
 
-        public Heap(T value, IComparer<T> comparer)
+        public Heap(IComparer<T> comparer) : this(comparer, new List<T>()) { }
+
+        public Heap(IComparer<T> comparer, List<T> values)
         {
-            Value = value;
             Comparer = comparer;
-        }
+            Values = new List<T>();
 
-        public static Heap<T> Heapify(List<T> values, IComparer<T> comparer)
-        {
-            if (values == null || values.Count == 0)
+            if (values != null)
             {
-                throw new ArgumentException();
-            }
-
-            var root = new Heap<T>(values[0], comparer);
-
-            for (var i = 1; i < values.Count; ++i)
-            {
-                root.Insert(values[i]);
-            }
-
-            return root;
-        }
-
-        public void Insert(T value)
-        {
-            if (ShouldComeAfter(value))
-            {
-                var oldValue = Value;
-                Value = value;
-                Insert(oldValue);
-            }
-            else
-            {
-                if (LeftChild == null)
+                foreach (var value in values)
                 {
-                    LeftChild = new Heap<T>(value, Comparer);
-                }
-                else if (RightChild == null)
-                {
-                    RightChild = new Heap<T>(value, Comparer);
-                }
-                else
-                {
-                    if (LeftChild.ShouldComeAfter(value))
-                    {
-                        LeftChild.Insert(value);
-                    }
-                    else
-                    {
-                        RightChild.Insert(value);
-                    }
+                    Add(value);
                 }
             }
         }
 
-        public T GetRoot()
+        private int ParentIndex(int index) => (index - 1) / 2;
+        private int RightChildIndex(int index) => (index * 2) + 1;
+        private int LeftChildIndex(int index) => (index * 2) + 2;
+
+        private void HeapifyUp()
         {
-            return Value;
+            var childIndex = Values.Count - 1;
+
+            while (childIndex > 0)
+            {
+                var child = Values[childIndex];
+                var parentIndex = ParentIndex(childIndex);
+                var parent = Values[parentIndex];
+
+                if (Comparer.Compare(parent, child) <= 0)
+                {
+                    break;
+                }
+
+                Values[parentIndex] = child;
+                Values[childIndex] = parent;
+
+                childIndex = parentIndex;
+            }
+        }
+
+        private void HeapifyDown()
+        {
+            var parentIndex = 0;
+
+            while (parentIndex < Values.Count)
+            {
+                var parent = Values[parentIndex];
+                var leftChildIndex = LeftChildIndex(parentIndex);
+                var rightChildIndex = RightChildIndex(parentIndex);              
+
+                if (leftChildIndex >= Values.Count)
+                {
+                    break;
+                }
+
+                var childIndex = leftChildIndex;
+                var child = Values[childIndex];
+
+                if (rightChildIndex < Values.Count && Comparer.Compare(Values[rightChildIndex], child) < 0)
+                {
+                    childIndex = rightChildIndex;
+                    child = Values[childIndex];                  
+                }
+
+                if (Comparer.Compare(parent, child) <= 0)
+                {
+                    break;
+                }
+
+                Values[parentIndex] = child;
+                Values[childIndex] = parent;
+
+                parentIndex = childIndex;
+            }
+        }
+
+        public void Add(T value)
+        {
+            Values.Add(value);
+            HeapifyUp();
+        }
+
+        public T PeekRoot()
+        {
+            if (Values.Count == 0)
+            {
+                throw new InvalidOperationException();
+            }
+
+            return Values[0];
         }
 
         public T PopRoot()
         {
-            if (!HasChildren)
+            var root = PeekRoot();
+            var childIndex = Values.Count - 1;
+            var child = Values[childIndex];
+
+            Values.RemoveAt(childIndex);
+
+            if (Values.Count > 0)
             {
-                return Value;
+                Values[0] = child;
+                HeapifyDown();
             }
 
-            var newRoot = (
-                ExistsLeftChild
-                ? ExistsRightChild && RightChild.ShouldComeBefore(LeftChild.Value)
-                    ? RightChild
-                    : LeftChild
-                : RightChild
-            );
-
-            var oldValue = Value;
-            Value = newRoot.Value;
-
-            if (!newRoot.HasChildren)
-            {
-                var isLeftChild = LeftChild == newRoot;
-                var isRightChild = RightChild == newRoot;
-
-                if (isLeftChild)
-                {
-                    LeftChild = null;
-                }
-                else
-                {
-                    RightChild = null;
-                }
-            }
-            else
-            {
-                newRoot.PopRoot();
-            }
-
-            return oldValue;
-        }
-
-        protected bool ShouldComeBefore(T value)
-        {
-            return Comparer.Compare(Value, value) < 0;
-        }
-
-        protected bool ShouldComeAfter(T value)
-        {
-            return !ShouldComeBefore(value);
-        }
-
-        public List<T> ToList()
-        {
-            var list = new List<T>();
-            var nodeQueue = new Queue<Heap<T>>();
-
-            nodeQueue.Enqueue(this);
-            while (nodeQueue.Count > 0)
-            {
-                var node = nodeQueue.Dequeue();
-                nodeQueue.Enqueue(node.LeftChild);
-                nodeQueue.Enqueue(node.RightChild);
-
-                list.Add(node.Value);
-            }
-
-            return list;
+            return root;
         }
     }
 }
