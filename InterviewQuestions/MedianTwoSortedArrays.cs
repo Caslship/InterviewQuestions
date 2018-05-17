@@ -44,22 +44,6 @@ namespace InterviewQuestions
                 return (a[aLo] + b[bLo]) / 2.0;
             }
 
-            if (aLength == 2 && bLength == 1)
-            {
-                return Math.Min(
-                    Math.Max(b[bLo], a[aLo]),
-                    a[aHi]
-                );
-            }
-
-            if (aLength == 1 && bLength == 2)
-            {
-                return Math.Min(
-                    Math.Max(a[aLo], b[bLo]),
-                    b[bHi]
-                );
-            }
-
             var aMedian = aLength % 2 == 0
                         ? (a[aLo + (aLength / 2)] + a[aLo + (aLength / 2) - 1]) / 2.0
                         : a[aLo + (aLength / 2)];
