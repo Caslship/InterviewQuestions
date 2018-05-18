@@ -43,6 +43,7 @@
     <Compile Include="GraphEdge.cs" />
     <Compile Include="GraphNode.cs" />
     <Compile Include="Heap.cs" />
+    <Compile Include="Interval.cs" />
     <Compile Include="MaxHeap.cs" />
     <Compile Include="MinHeap.cs" />
     <Compile Include="Node.cs" />

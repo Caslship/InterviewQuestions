@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="EditStepLadderTests.cs" />
     <Compile Include="MedianTwoSortedArraysTests.cs" />
+    <Compile Include="MergeKIntervalsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="KthSmallestElementTests.cs" />
     <Compile Include="TestUtilities.cs" />
