@@ -48,6 +48,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CoinChangeTests.cs" />
     <Compile Include="EditStepLadderTests.cs" />
     <Compile Include="MedianTwoSortedArraysTests.cs" />
     <Compile Include="MergeKIntervalsTests.cs" />

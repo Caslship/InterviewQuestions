@@ -31,14 +31,7 @@ namespace InterviewQuestions
                 var minLo = merged[merged.Count - 1].Lo;
                 var maxHi = merged[merged.Count - 1].Hi;
 
-                if ((interval.Lo <= maxHi && interval.Lo >= minLo) ||
-                    (interval.Hi <= maxHi && interval.Hi >= minLo))
-                {
-                    merged[merged.Count - 1].Lo = Math.Min(interval.Lo, minLo);
-                    merged[merged.Count - 1].Hi = Math.Max(interval.Hi, maxHi);
-                }
-                else if ((interval.Lo <= minLo && interval.Hi >= minLo) ||
-                    (interval.Hi >= maxHi && interval.Lo <= maxHi))
+                if (interval.Lo <= maxHi && interval.Hi >= minLo)
                 {
                     merged[merged.Count - 1].Lo = Math.Min(interval.Lo, minLo);
                     merged[merged.Count - 1].Hi = Math.Max(interval.Hi, maxHi);
