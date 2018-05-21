@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace InterviewQuestions.DataStructures
 {
-    public class GraphEdge<T>
+    public class GraphEdge
     {
         public int Cost { get; }
-        public GraphNode<T> A { get; }
-        public GraphNode<T> B { get; }
+        public GraphNode A { get; }
+        public GraphNode B { get; }
 
-        public GraphEdge(GraphNode<T> a, GraphNode<T> b) : this(a, b, 0) { }
+        public GraphEdge(GraphNode a, GraphNode b) : this(a, b, 0) { }
 
-        public GraphEdge(GraphNode<T> a, GraphNode<T> b, int cost)
+        public GraphEdge(GraphNode a, GraphNode b, int cost)
         {
             A = a;
             B = b;

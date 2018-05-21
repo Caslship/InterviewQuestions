@@ -10,6 +10,7 @@ namespace InterviewQuestions.DataStructures
     {
         private List<T> Values { get; }
         private IComparer<T> Comparer { get; }
+        public int Count => Values.Count;
 
         public Heap(IComparer<T> comparer) : this(comparer, new List<T>()) { }
 

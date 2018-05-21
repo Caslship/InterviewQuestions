@@ -6,9 +6,22 @@ using System.Threading.Tasks;
 
 namespace InterviewQuestions.DataStructures
 {
-    public class GraphNode<T>
+    public class GraphNode
     {
-        public T Value { get; }
-        public List<GraphEdge<T>> Connections { get; }
+        public List<GraphEdge> Connections { get; }
+
+        public GraphNode() : this(new List<GraphNode>()) { }
+
+        public GraphNode(List<GraphNode> connectedNodes)
+        {
+            Connections = new List<GraphEdge>();
+
+            foreach (var node in connectedNodes)
+            {
+                Connections.Add(
+                    new GraphEdge(this, node)
+                );
+            }
+        }
     }
 }

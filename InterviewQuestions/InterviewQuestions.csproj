@@ -51,6 +51,7 @@
     <Compile Include="QuickSort.cs" />
     <Compile Include="ReverseLinkedList.cs" />
     <Compile Include="TwoSum.cs" />
+    <Compile Include="ValidateBinarySearchTree.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InterviewQuestions.DataStructures\InterviewQuestions.DataStructures.csproj">
